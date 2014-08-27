@@ -1,11 +1,21 @@
 ﻿<svg width="500" height="350" viewBox="{{viewBox()}}" style="border: 1px solid blue;">
     
-    <g id="gWheel">
-        <circle ng-attr-cx="{{gWheel.x()}}" ng-attr-cy="{{gWheel.y()}}" ng-attr-r="{{gWheel.radius()}}" />
-    </g>
-    
     <g id="gDrive">
         <circle ng-attr-cx="{{gDrive.x()}}" ng-attr-cy="{{gDrive.y()}}" ng-attr-r="{{gDrive.radius()}}" />
     </g>
+
+    <g id="gWheel">
+        <circle ng-attr-cx="{{gWheel.x()}}" ng-attr-cy="{{gWheel.y()}}" ng-attr-r="{{gWheel.radius()}}" />
+
+        
+        <line ng-attr-x1="{{gWheel.x() + gWheel.radius() - gWheel.slotDepth()}}"
+              ng-attr-x2="{{gWheel.x() + gWheel.radius()}}"
+              ng-attr-y1="{{gWheel.y()}}"
+              ng-attr-y2="{{gWheel.y()}}"
+              stroke="red" stroke-width="0.05" />
+
+    </g>
+    
+    
     
 </svg>

@@ -23,7 +23,9 @@
         s.gWheel = {
             x: function () { return 0; },
             y: function () { return 0; },
-            radius: function () { return s.params.b; }
+            radius: function () { return s.params.b; },
+            slotQty: function () { return s.params.n; },
+            slotDepth: function () { return s.params.s; }
         };
 
         s.gDrive = {
