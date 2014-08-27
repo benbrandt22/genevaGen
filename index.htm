@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <title>Geneva Drive Generator</title>
+</head>
+<body>
+
+    <div ng-controller="genevaController">
+
+        <div class="variableDef">
+            <label>
+                <span class="name">a</span>
+                <span class="desc">drive crank radius</span>
+                <input type="number" ng-model="a" />
+            </label>
+        </div>
+        <div class="variableDef">
+            <label>
+                <span class="name">b</span>
+                <span class="desc">Geneva wheel radius</span>
+                <input type="number" ng-model="b" />
+            </label>
+        </div>
+        <div class="variableDef">
+            <label>
+                <span class="name">n</span>
+                <span class="desc">number of positions</span>
+                <input type="number" ng-model="n" />
+            </label>
+        </div>
+        <div class="variableDef">
+            <label>
+                <span class="name">p</span>
+                <span class="desc">pin diameter</span>
+                <input type="number" ng-model="p" />
+            </label>
+        </div>
+        <div class="variableDef">
+            <label>
+                <span class="name">t</span>
+                <span class="desc">allowed clearance</span>
+                <input type="number" ng-model="t" />
+            </label>
+        </div>
+
+        <hr />
+
+        <div class="variableDef">
+            <span class="name">c</span>
+            <span class="desc">center distance</span>
+            <span class="value">{{c() | number:4}}</span>
+        </div>
+        <div class="variableDef">
+            <span class="name">s</span>
+            <span class="desc">slot center length</span>
+            <span class="value">{{s() | number:4}}</span>
+        </div>
+        <div class="variableDef">
+            <span class="name">w</span>
+            <span class="desc">slot width</span>
+            <span class="value">{{w() | number:4}}</span>
+        </div>
+        <div class="variableDef">
+            <span class="name">y</span>
+            <span class="desc">stop arc radius</span>
+            <span class="value">{{y() | number:4}}</span>
+        </div>
+        <div class="variableDef">
+            <span class="name">z</span>
+            <span class="desc">stop disc radius</span>
+            <span class="value">{{z() | number:4}}</span>
+        </div>
+        <div class="variableDef">
+            <span class="name">v</span>
+            <span class="desc">clearance arc</span>
+            <span class="value">{{v() | number:4}}</span>
+        </div>
+
+
+        <geneva-drawing params="drawingParams()" />
+
+
+    </div>
+
+
+
+
+
+
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="genevaController.js"></script>
+    <script type="text/javascript" src="genevaDrawing.js"></script>
+</body>
+</html>
