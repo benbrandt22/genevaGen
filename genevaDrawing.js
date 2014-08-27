@@ -9,11 +9,9 @@
             scope: {
                 params: '='
             },
+            controller: 'genevaDrawingController',
             link: function(scope, element, attrs) {
                 
-                console.log('genevaDrawing LINK');
-                console.log(scope);
-
             },
             templateUrl: "genevaDrawingTmpl.htm"
         };
