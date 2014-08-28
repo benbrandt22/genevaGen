@@ -27,10 +27,27 @@
 
             </g>
         </mask>
+
+        <mask id="stopDiscMask">
+            <circle ng-attr-cx="{{gDrive.x()}}"
+                ng-attr-cy="{{gDrive.y()}}"
+                ng-attr-r="{{gDrive.stopDisc.radius()}}"
+                fill="white" />
+            <circle ng-attr-cx="{{gDrive.x() - gDrive.stopDisc.radius()}}"
+                ng-attr-cy="{{gDrive.y() - gDrive.stopDisc.clearanceRadius()}}"
+                ng-attr-r="{{gDrive.stopDisc.clearanceRadius()}}"
+                fill="black" />
+        </mask>
     </defs>
     
     <g id="gDrive">
         <circle ng-attr-cx="{{gDrive.x()}}" ng-attr-cy="{{gDrive.y()}}" ng-attr-r="{{gDrive.radius()}}" />
+
+        <circle ng-attr-cx="{{gDrive.x()}}"
+                ng-attr-cy="{{gDrive.y()}}"
+                ng-attr-r="{{gDrive.stopDisc.radius()}}"
+                mask="url(#stopDiscMask)"
+                fill="red" />
     </g>
 
     <g id="gWheel">

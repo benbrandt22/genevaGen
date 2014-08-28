@@ -44,7 +44,11 @@
         s.gDrive = {
             x: function () { return s.gWheel.x() + s.params.c; },
             y: function () { return s.gWheel.y(); },
-            radius: function () { return s.params.a; }
+            radius: function () { return s.params.a; },
+            stopDisc: {
+                radius: function () { return s.params.z; },
+                clearanceRadius: function () { return s.params.v; }
+            }
         };
 
     });
