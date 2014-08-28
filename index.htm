@@ -82,7 +82,14 @@
             <span class="value">{{v() | number:4}}</span>
         </div>
 
-        <geneva-drawing params="drawingParams()" />
+        <div>
+            <label>
+                <input type="checkbox" ng-model="animation.enabled" />
+                Animate
+            </label>
+        </div>
+
+        <geneva-drawing params="drawingParams()" animation="animation" />
 
     </div>
 

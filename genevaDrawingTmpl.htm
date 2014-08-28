@@ -40,7 +40,9 @@
         </mask>
     </defs>
     
-    <g id="gDrive">
+    <g id="gDrive"
+       ng-attr-transform="rotate({{gDrive.spinAngle}} {{gDrive.x()}} {{gDrive.y()}})">
+
         <circle ng-attr-cx="{{gDrive.x()}}" ng-attr-cy="{{gDrive.y()}}" ng-attr-r="{{gDrive.radius()}}" />
 
         <circle ng-attr-cx="{{gDrive.x()}}"

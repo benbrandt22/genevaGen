@@ -3,7 +3,7 @@
 
     var app = angular.module('app');
 
-    app.controller('genevaDrawingController', function ($scope) {
+    app.controller('genevaDrawingController', ['$scope', '$interval', function ($scope, $interval) {
         
         var s = $scope;
 
@@ -58,9 +58,22 @@
                     var position = (-1 * degrees); // negative to go counter clockwise
                     return position;
                 }
-            }
+            },
+            spinAngle: 0
         };
 
-    });
+        var animationTimer;
+
+        s.$watch('animation.enabled', function (animationEnabled) {
+            if (animationEnabled) {
+                animationTimer = $interval(function () {
+                    s.gDrive.spinAngle++;
+                }, 20);
+            } else {
+                $interval.cancel(animationTimer);
+            }
+        });
+
+    }]);
 
 })();

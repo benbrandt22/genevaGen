@@ -13,6 +13,10 @@
         $scope.p = 0.25;
         $scope.t = 0.05;
 
+        $scope.animation = {
+            enabled: false
+        };
+
         $scope.a = function () {
             // drive crank radius
             if ($scope.primaryCalculationRadius == 'a') {
