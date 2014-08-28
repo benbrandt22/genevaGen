@@ -48,6 +48,16 @@
             stopDisc: {
                 radius: function () { return s.params.z; },
                 clearanceRadius: function () { return s.params.v; }
+            },
+            pin: {
+                radius: function () { return (s.params.p / 2); },
+                distance: function () { return s.params.a; },
+                startPositionDegrees: function () {
+                    var radians = (Math.PI - Math.atan(s.params.b / s.params.a));
+                    var degrees = (radians * (180 / Math.PI));
+                    var position = (-1 * degrees); // negative to go counter clockwise
+                    return position;
+                }
             }
         };
 

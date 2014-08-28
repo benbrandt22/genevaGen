@@ -48,6 +48,12 @@
                 ng-attr-r="{{gDrive.stopDisc.radius()}}"
                 mask="url(#stopDiscMask)"
                 fill="red" />
+
+        <circle ng-attr-cx="{{gDrive.x() + gDrive.pin.distance()}}"
+                ng-attr-cy="{{gDrive.y()}}"
+                ng-attr-r="{{gDrive.pin.radius()}}"
+                ng-attr-transform="rotate({{gDrive.pin.startPositionDegrees()}} {{gDrive.x()}} {{gDrive.y()}})"
+                fill="red" />
     </g>
 
     <g id="gWheel">
