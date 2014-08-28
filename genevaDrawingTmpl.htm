@@ -19,6 +19,12 @@
                     ng-attr-ry="{{(gWheel.slotWidth() / 2)}}"
                     fill="black"/>
 
+                <circle
+                    ng-attr-cx="{{gWheel.x() + gWheel.stopDiscCutout.distanceFromCenter()}}"
+                    ng-attr-cy="{{gWheel.y()}}"
+                    ng-attr-r="{{gWheel.stopDiscCutout.radius()}}"
+                    ng-attr-transform="rotate({{180 / gWheel.slotQty()}} {{gWheel.x()}} {{gWheel.y()}})"/>
+
             </g>
         </mask>
     </defs>

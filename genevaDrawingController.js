@@ -34,6 +34,10 @@
                     positionsInDegrees.push(pos);
                 }
                 return positionsInDegrees;
+            },
+            stopDiscCutout: {
+                radius: function () { return s.params.y; },
+                distanceFromCenter: function () { return s.params.c; }
             }
         };
 
