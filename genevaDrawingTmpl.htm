@@ -51,7 +51,8 @@
                 mask="url(#stopDiscMask)"
                 fill="red" />
 
-        <circle ng-attr-cx="{{gDrive.x() + gDrive.pin.distance()}}"
+        <circle id="gDrive_pin"
+                ng-attr-cx="{{gDrive.x() + gDrive.pin.distance()}}"
                 ng-attr-cy="{{gDrive.y()}}"
                 ng-attr-r="{{gDrive.pin.radius()}}"
                 ng-attr-transform="rotate({{gDrive.pin.startPositionDegrees()}} {{gDrive.x()}} {{gDrive.y()}})"
@@ -64,11 +65,13 @@
             ng-attr-r="{{gWheel.radius()}}"
             mask="url(#gWheelMask)"
             fill="blue"/>
-
-
-
     </g>
 
 
+    <circle id="gDrive_pin_positionRef"
+            ng-attr-cx="{{gDrive.pin.x()}}"
+            ng-attr-cy="{{gDrive.pin.y()}}"
+            ng-attr-r="{{gDrive.pin.radius() / 2}}"
+            fill="yellow" />
 
 </svg>

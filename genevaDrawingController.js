@@ -50,6 +50,14 @@
                 clearanceRadius: function () { return s.params.v; }
             },
             pin: {
+                x: function () {
+                    var x = s.gDrive.x() + (s.gDrive.pin.distance() * Math.cos(s.gDrive.pin.positionRadians()));
+                    return x;
+                },
+                y: function () {
+                    var y = s.gDrive.y() + (s.gDrive.pin.distance() * Math.sin(s.gDrive.pin.positionRadians()));
+                    return y;
+                },
                 radius: function () { return (s.params.p / 2); },
                 distance: function () { return s.params.a; },
                 startPositionDegrees: function () {
@@ -57,6 +65,11 @@
                     var degrees = (radians * (180 / Math.PI));
                     var position = (-1 * degrees); // negative to go counter clockwise
                     return position;
+                },
+                positionRadians: function () {
+                    var degrees = (s.gDrive.pin.startPositionDegrees() + s.gDrive.spinAngle);
+                    var radians = (Math.PI / 180) * degrees;
+                    return radians;
                 }
             },
             spinAngle: 0
