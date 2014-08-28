@@ -10,11 +10,15 @@
 
             <g ng-repeat="position in gWheel.slotPositions()"
                 ng-attr-transform="rotate({{position}} {{gWheel.x()}} {{gWheel.y()}})">
-                <line ng-attr-x1="{{gWheel.x() + gWheel.radius() - gWheel.slotDepth()}}"
-                    ng-attr-x2="{{gWheel.x() + gWheel.radius()}}"
-                    ng-attr-y1="{{gWheel.y()}}"
-                    ng-attr-y2="{{gWheel.y()}}"
-                    stroke="black" stroke-width="0.05" />
+
+                <rect ng-attr-x="{{gWheel.x() + gWheel.radius() - gWheel.slotDepth() - gWheel.slotWidth()}}"
+                    ng-attr-y="{{gWheel.y() - (gWheel.slotWidth() / 2)}}" 
+	                ng-attr-width="{{gWheel.slotDepth() + (2 * gWheel.slotWidth())}}"
+                    ng-attr-height="{{gWheel.slotWidth()}}"
+	                ng-attr-rx="{{(gWheel.slotWidth() / 2)}}"
+                    ng-attr-ry="{{(gWheel.slotWidth() / 2)}}"
+                    fill="black"/>
+
             </g>
         </mask>
     </defs>

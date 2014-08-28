@@ -26,6 +26,7 @@
             radius: function () { return s.params.b; },
             slotQty: function () { return s.params.n; },
             slotDepth: function () { return s.params.s; },
+            slotWidth: function () { return s.params.w; },
             slotPositions: function () {
                 var positionsInDegrees = [];
                 for (var i = 0; i < this.slotQty(); i++) {
