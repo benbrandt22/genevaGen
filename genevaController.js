@@ -5,11 +5,11 @@
 
     app.controller('genevaController', function ($scope) {
         
-        $scope.a = 1;
-        $scope.b = 2;
+        $scope.a = 1.75;
+        $scope.b = 3;
         $scope.n = 6;
-        $scope.p = 0.1;
-        $scope.t = 0;
+        $scope.p = 0.25;
+        $scope.t = 0.05;
 
         $scope.c = function () {
             // center distance
