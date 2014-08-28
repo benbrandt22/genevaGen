@@ -7,12 +7,14 @@
     <g id="gWheel">
         <circle ng-attr-cx="{{gWheel.x()}}" ng-attr-cy="{{gWheel.y()}}" ng-attr-r="{{gWheel.radius()}}" />
 
-        
-        <line ng-attr-x1="{{gWheel.x() + gWheel.radius() - gWheel.slotDepth()}}"
-              ng-attr-x2="{{gWheel.x() + gWheel.radius()}}"
-              ng-attr-y1="{{gWheel.y()}}"
-              ng-attr-y2="{{gWheel.y()}}"
-              stroke="red" stroke-width="0.05" />
+        <g ng-repeat="position in gWheel.slotPositions()"
+            transform = "rotate({{position}} {{gWheel.x()}} {{gWheel.y()}})">
+            <line ng-attr-x1="{{gWheel.x() + gWheel.radius() - gWheel.slotDepth()}}"
+                  ng-attr-x2="{{gWheel.x() + gWheel.radius()}}"
+                  ng-attr-y1="{{gWheel.y()}}"
+                  ng-attr-y2="{{gWheel.y()}}"
+                  stroke="red" stroke-width="0.05" />
+        </g>
 
     </g>
     

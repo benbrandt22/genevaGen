@@ -25,7 +25,15 @@
             y: function () { return 0; },
             radius: function () { return s.params.b; },
             slotQty: function () { return s.params.n; },
-            slotDepth: function () { return s.params.s; }
+            slotDepth: function () { return s.params.s; },
+            slotPositions: function () {
+                var positionsInDegrees = [];
+                for (var i = 0; i < this.slotQty(); i++) {
+                    var pos = (i + 0.5) * (360 / this.slotQty())
+                    positionsInDegrees.push(pos);
+                }
+                return positionsInDegrees;
+            }
         };
 
         s.gDrive = {
