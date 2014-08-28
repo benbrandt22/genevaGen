@@ -72,6 +72,6 @@
             ng-attr-cx="{{gDrive.pin.x()}}"
             ng-attr-cy="{{gDrive.pin.y()}}"
             ng-attr-r="{{gDrive.pin.radius() / 2}}"
-            fill="yellow" />
+            fill="{{gDrive.pin.isWithinWheel() ? 'green' : 'yellow'}}" />
 
 </svg>

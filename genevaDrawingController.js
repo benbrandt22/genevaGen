@@ -70,6 +70,10 @@
                     var degrees = (s.gDrive.pin.startPositionDegrees() + s.gDrive.spinAngle);
                     var radians = (Math.PI / 180) * degrees;
                     return radians;
+                },
+                isWithinWheel: function () {
+                    var distFromWheelCenter = pointDistance(s.gWheel.x(), s.gWheel.y(), s.gDrive.pin.x(), s.gDrive.pin.y());
+                    return (distFromWheelCenter <= s.gWheel.radius());
                 }
             },
             spinAngle: 0
@@ -86,6 +90,13 @@
                 $interval.cancel(animationTimer);
             }
         });
+
+        var pointDistance = function (x1, y1, x2, y2) {
+            var xs = Math.pow(x2 - x1, 2);
+            var ys = Math.pow(y2 - y1, 2);
+            return Math.sqrt(xs + ys);
+        };
+
 
     }]);
 
