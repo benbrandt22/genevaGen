@@ -10,17 +10,21 @@
     <div ng-controller="genevaController">
 
         <div class="variableDef">
+            <input type="radio" ng-model="primaryCalculationRadius" value="a">
             <label>
                 <span class="name">a</span>
                 <span class="desc">drive crank radius</span>
-                <input type="number" ng-model="a" />
+                <input type="number" ng-model="a_input" ng-show="primaryCalculationRadius=='a'" />
+                <span ng-show="primaryCalculationRadius=='b'">{{a()}}</span>
             </label>
         </div>
         <div class="variableDef">
+            <input type="radio" ng-model="primaryCalculationRadius" value="b">
             <label>
                 <span class="name">b</span>
                 <span class="desc">Geneva wheel radius</span>
-                <input type="number" ng-model="b" />
+                <input type="number" ng-model="b_input" ng-show="primaryCalculationRadius=='b'" />
+                <span ng-show="primaryCalculationRadius=='a'">{{b()}}</span>
             </label>
         </div>
         <div class="variableDef">
@@ -78,14 +82,12 @@
             <span class="value">{{v() | number:4}}</span>
         </div>
 
-
         <geneva-drawing params="drawingParams()" />
-
 
     </div>
 
 
-
+    
 
 
 
