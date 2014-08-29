@@ -11,7 +11,7 @@
             <g ng-repeat="position in gWheel.slotPositions()"
                 ng-attr-transform="rotate({{position}} {{gWheel.x()}} {{gWheel.y()}})">
 
-                <rect ng-attr-x="{{gWheel.x() + gWheel.radius() - gWheel.slotDepth() - gWheel.slotWidth()}}"
+                <rect ng-attr-x="{{gWheel.x() + gWheel.radius() - gWheel.slotDepth() - (gWheel.slotWidth()/2)}}"
                     ng-attr-y="{{gWheel.y() - (gWheel.slotWidth() / 2)}}" 
 	                ng-attr-width="{{gWheel.slotDepth() + (2 * gWheel.slotWidth())}}"
                     ng-attr-height="{{gWheel.slotWidth()}}"
