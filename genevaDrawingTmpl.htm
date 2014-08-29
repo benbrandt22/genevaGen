@@ -59,7 +59,9 @@
                 fill="red" />
     </g>
 
-    <g id="gWheel">
+    <g id="gWheel"
+        ng-attr-transform="rotate({{gWheel.rotationDegrees()}} {{gWheel.x()}} {{gWheel.y()}})">
+
         <circle ng-attr-cx="{{gWheel.x()}}"
             ng-attr-cy="{{gWheel.y()}}"
             ng-attr-r="{{gWheel.radius()}}"

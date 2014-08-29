@@ -30,7 +30,7 @@
             slotPositions: function () {
                 var positionsInDegrees = [];
                 for (var i = 0; i < this.slotQty(); i++) {
-                    var pos = (i + 0.5) * (360 / this.slotQty())
+                    var pos = (i * (360 / this.slotQty()));
                     positionsInDegrees.push(pos);
                 }
                 return positionsInDegrees;
@@ -38,6 +38,17 @@
             stopDiscCutout: {
                 radius: function () { return s.params.y; },
                 distanceFromCenter: function () { return s.params.c; }
+            },
+            rotationDegrees: function () {
+                if (s.gDrive.pin.isWithinWheel()) {
+                    // pin is within a wheel slot, calculate the wheel's position
+                    var angleToPinRadians = Math.atan((s.gDrive.pin.y() - s.gWheel.y()) / (s.gDrive.pin.x() - s.gWheel.x()));
+                    var angleToPinDegrees = (angleToPinRadians * (180 / Math.PI));
+                    return angleToPinDegrees;
+                } else {
+                    // pin is outside wheel, revert to normal 'locked' position
+                    return ((360 / this.slotQty()) / 2);
+                }
             }
         };
 
