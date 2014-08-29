@@ -95,7 +95,7 @@
         s.$watch('animation.enabled', function (animationEnabled) {
             if (animationEnabled) {
                 animationTimer = $interval(function () {
-                    s.gDrive.spinAngle++;
+                    s.gDrive.spinAngle = ((s.gDrive.spinAngle + 1) % 360);
                 }, 20);
             } else {
                 $interval.cancel(animationTimer);
