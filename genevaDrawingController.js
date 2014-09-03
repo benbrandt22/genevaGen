@@ -7,95 +7,113 @@
         
         var s = $scope;
 
-        s.viewBox = function () {
-            // min x = left side of the genwva wheel, plus 10%
-            var minx = (s.gWheel.x() - (1.1 * s.params.b));
-            // min y = bottom of largest wheel radius, plus 10%
-            var miny = (s.gWheel.y() - (1.1 * Math.max(s.params.a, s.params.b)));
-            // width = distance between wheels, plus 110% of each radius
-            var width = s.params.c + (1.1 * s.params.a) + (1.1 * s.params.b);
-            // height = max diameter plus 10%
-            var height = (Math.max(s.params.a, s.params.b) * 2) * 1.1;
+        s.$watchCollection('[params, drive.spinAngle]', function (newValues) {
+            var params = newValues[0];
 
-            return (minx + ' ' + miny + ' ' + width + ' ' + height);
-        };
+            var getPinStartPositionDegrees = function () {
+                var radians = (Math.PI - Math.atan(params.b / params.a));
+                var degrees = (radians * (180 / Math.PI));
+                var position = (-1 * degrees); // negative to go counter clockwise
+                return position;
+            };
 
-        s.gWheel = {
-            x: function () { return 0; },
-            y: function () { return 0; },
-            radius: function () { return s.params.b; },
-            slotQty: function () { return s.params.n; },
-            slotDepth: function () { return s.params.s; },
-            slotWidth: function () { return s.params.w; },
-            slotPositions: function () {
-                var positionsInDegrees = [];
-                for (var i = 0; i < this.slotQty(); i++) {
-                    var pos = (i * (360 / this.slotQty()));
-                    positionsInDegrees.push(pos);
-                }
-                return positionsInDegrees;
-            },
-            stopDiscCutout: {
-                radius: function () { return s.params.y; },
-                distanceFromCenter: function () { return s.params.c; }
-            },
-            rotationDegrees: function () {
-                if (s.gDrive.pin.isWithinWheel()) {
-                    // pin is within a wheel slot, calculate the wheel's position
-                    var angleToPinRadians = Math.atan((s.gDrive.pin.y() - s.gWheel.y()) / (s.gDrive.pin.x() - s.gWheel.x()));
-                    var angleToPinDegrees = (angleToPinRadians * (180 / Math.PI));
-                    return angleToPinDegrees;
+            var getPinPositionRadians = function () {
+                var degrees = (getPinStartPositionDegrees() + getDriveSpinAngle());
+                var radians = (Math.PI / 180) * degrees;
+                return radians;
+            };
+
+            var getDriveSpinAngle = function () {
+                if (s.drive && s.drive.spinAngle) {
+                    return s.drive.spinAngle;
                 } else {
-                    // pin is outside wheel, revert to normal 'locked' position
-                    return ((360 / this.slotQty()) / 2);
+                    return 0;
                 }
-            }
-        };
+            };
 
-        s.gDrive = {
-            x: function () { return s.gWheel.x() + s.params.c; },
-            y: function () { return s.gWheel.y(); },
-            radius: function () { return s.params.a; },
-            stopDisc: {
-                radius: function () { return s.params.z; },
-                clearanceRadius: function () { return s.params.v; }
-            },
-            pin: {
-                x: function () {
-                    var x = s.gDrive.x() + (s.gDrive.pin.distance() * Math.cos(s.gDrive.pin.positionRadians()));
-                    return x;
+            s.drive = {
+                x: (0 + params.c),
+                y: 0,
+                radius: params.a,
+                stopDisc: {
+                    radius: params.z,
+                    clearanceRadius: params.v
                 },
-                y: function () {
-                    var y = s.gDrive.y() + (s.gDrive.pin.distance() * Math.sin(s.gDrive.pin.positionRadians()));
-                    return y;
+                pin: {
+                    x: (function () {
+                        var x = (0 + params.c) + (params.a * Math.cos(getPinPositionRadians()));
+                        return x;
+                    })(),
+                    y: (function () {
+                        var y = 0 + (params.a * Math.sin(getPinPositionRadians()));
+                        return y;
+                    })(),
+                    distance: params.a,
+                    radius: (params.p / 2),
+                    startPositionDegrees: getPinStartPositionDegrees(),
+                    positionRadians: getPinPositionRadians(),
+                    isWithinWheel: function () {
+                        var distFromWheelCenter = pointDistance(s.wheel.x, s.wheel.y, s.drive.pin.x, s.drive.pin.y);
+                        return (distFromWheelCenter <= s.wheel.radius);
+                    }
                 },
-                radius: function () { return (s.params.p / 2); },
-                distance: function () { return s.params.a; },
-                startPositionDegrees: function () {
-                    var radians = (Math.PI - Math.atan(s.params.b / s.params.a));
-                    var degrees = (radians * (180 / Math.PI));
-                    var position = (-1 * degrees); // negative to go counter clockwise
-                    return position;
+                spinAngle: getDriveSpinAngle()
+            };
+
+            s.wheel = {
+                x: 0,
+                y: 0,
+                radius: params.b,
+                slotQty: params.n,
+                slotPositionsDegrees: (function () {
+                    var positionsInDegrees = [];
+                    for (var i = 0; i < params.n ; i++) {
+                        var pos = (i * (360 / params.n));
+                        positionsInDegrees.push(pos);
+                    }
+                    return positionsInDegrees;
+                })(),
+                slotDepth: params.s,
+                slotWidth: params.w,
+                stopDiscCutout: {
+                    radius: params.y,
+                    distanceFromCenter: params.c
                 },
-                positionRadians: function () {
-                    var degrees = (s.gDrive.pin.startPositionDegrees() + s.gDrive.spinAngle);
-                    var radians = (Math.PI / 180) * degrees;
-                    return radians;
-                },
-                isWithinWheel: function () {
-                    var distFromWheelCenter = pointDistance(s.gWheel.x(), s.gWheel.y(), s.gDrive.pin.x(), s.gDrive.pin.y());
-                    return (distFromWheelCenter <= s.gWheel.radius());
+                rotationDegrees: function () {
+                    if (s.drive.pin.isWithinWheel()) {
+                        // pin is within a wheel slot, calculate the wheel's position
+                        var angleToPinRadians = Math.atan((s.drive.pin.y - s.wheel.y) / (s.drive.pin.x - s.wheel.x));
+                        var angleToPinDegrees = (angleToPinRadians * (180 / Math.PI));
+                        return angleToPinDegrees;
+                    } else {
+                        // pin is outside wheel, revert to normal 'locked' position
+                        return ((360 / s.wheel.slotQty) / 2);
+                    }
                 }
-            },
-            spinAngle: 0
-        };
+            };
+
+            s.viewBox = (function () {
+                // min x = left side of the geneva wheel, plus 10%
+                var minx = (s.wheel.x - (1.1 * params.b));
+                // min y = bottom of largest wheel radius, plus 10%
+                var miny = (s.wheel.y - (1.1 * Math.max(params.a, params.b)));
+                // width = distance between wheels, plus 110% of each radius
+                var width = params.c + (1.1 * params.a) + (1.1 * params.b);
+                // height = max diameter plus 10%
+                var height = (Math.max(params.a, params.b) * 2) * 1.1;
+
+                return (minx + ' ' + miny + ' ' + width + ' ' + height);
+            })();
+
+        });
+
 
         var animationTimer;
 
         s.$watch('animation.enabled', function (animationEnabled) {
             if (animationEnabled) {
                 animationTimer = $interval(function () {
-                    s.gDrive.spinAngle = ((s.gDrive.spinAngle + 1) % 360);
+                    s.drive.spinAngle = ((s.drive.spinAngle + 1) % 360);
                 }, 20);
             } else {
                 $interval.cancel(animationTimer);

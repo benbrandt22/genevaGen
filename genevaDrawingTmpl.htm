@@ -1,79 +1,78 @@
-﻿<svg width="500" height="350" svg-bind-viewbox="{{viewBox()}}" style="border: 1px solid blue;">
+﻿<svg width="500" height="350" svg-bind-viewbox="{{viewBox}}" style="border: 1px solid blue;">
 
 
     <defs>
         <mask id="gWheelMask">
-            <circle ng-attr-cx="{{gWheel.x()}}"
-                ng-attr-cy="{{gWheel.y()}}"
-                ng-attr-r="{{gWheel.radius()}}"
+            <circle ng-attr-cx="{{wheel.x}}"
+                ng-attr-cy="{{wheel.y}}"
+                ng-attr-r="{{wheel.radius}}"
                 fill="white" />
 
-            <g ng-repeat="position in gWheel.slotPositions()"
-                ng-attr-transform="rotate({{position}} {{gWheel.x()}} {{gWheel.y()}})">
+            <g ng-repeat="position in wheel.slotPositionsDegrees"
+               ng-attr-transform="rotate({{position}} {{wheel.x}} {{wheel.y}})">
 
-                <rect ng-attr-x="{{gWheel.x() + gWheel.radius() - gWheel.slotDepth() - (gWheel.slotWidth()/2)}}"
-                    ng-attr-y="{{gWheel.y() - (gWheel.slotWidth() / 2)}}" 
-	                ng-attr-width="{{gWheel.slotDepth() + (2 * gWheel.slotWidth())}}"
-                    ng-attr-height="{{gWheel.slotWidth()}}"
-	                ng-attr-rx="{{(gWheel.slotWidth() / 2)}}"
-                    ng-attr-ry="{{(gWheel.slotWidth() / 2)}}"
-                    fill="black"/>
+                <rect ng-attr-x="{{wheel.x + wheel.radius - wheel.slotDepth - (wheel.slotWidth/2)}}"
+                      ng-attr-y="{{wheel.y - (wheel.slotWidth / 2)}}"
+                      ng-attr-width="{{wheel.slotDepth + (2 * wheel.slotWidth)}}"
+                      ng-attr-height="{{wheel.slotWidth}}"
+                      ng-attr-rx="{{(wheel.slotWidth / 2)}}"
+                      ng-attr-ry="{{(wheel.slotWidth / 2)}}"
+                      fill="black" />
 
-                <circle
-                    ng-attr-cx="{{gWheel.x() + gWheel.stopDiscCutout.distanceFromCenter()}}"
-                    ng-attr-cy="{{gWheel.y()}}"
-                    ng-attr-r="{{gWheel.stopDiscCutout.radius()}}"
-                    ng-attr-transform="rotate({{180 / gWheel.slotQty()}} {{gWheel.x()}} {{gWheel.y()}})"/>
+                <circle ng-attr-cx="{{wheel.x + wheel.stopDiscCutout.distanceFromCenter}}"
+                        ng-attr-cy="{{wheel.y}}"
+                        ng-attr-r="{{wheel.stopDiscCutout.radius}}"
+                        ng-attr-transform="rotate({{180 / wheel.slotQty}} {{wheel.x}} {{wheel.y}})" />
 
             </g>
         </mask>
 
         <mask id="stopDiscMask">
-            <circle ng-attr-cx="{{gDrive.x()}}"
-                ng-attr-cy="{{gDrive.y()}}"
-                ng-attr-r="{{gDrive.stopDisc.radius()}}"
+            <circle ng-attr-cx="{{drive.x}}"
+                ng-attr-cy="{{drive.y}}"
+                ng-attr-r="{{drive.stopDisc.radius}}"
                 fill="white" />
-            <circle ng-attr-cx="{{gDrive.x() - gDrive.stopDisc.radius()}}"
-                ng-attr-cy="{{gDrive.y() - gDrive.stopDisc.clearanceRadius()}}"
-                ng-attr-r="{{gDrive.stopDisc.clearanceRadius()}}"
+            <circle ng-attr-cx="{{drive.x - drive.stopDisc.radius}}"
+                ng-attr-cy="{{drive.y - drive.stopDisc.clearanceRadius}}"
+                ng-attr-r="{{drive.stopDisc.clearanceRadius}}"
                 fill="black" />
         </mask>
     </defs>
     
     <g id="gDrive"
-       ng-attr-transform="rotate({{gDrive.spinAngle}} {{gDrive.x()}} {{gDrive.y()}})">
+       ng-attr-transform="rotate({{drive.spinAngle}} {{drive.x}} {{drive.y}})">
 
-        <circle ng-attr-cx="{{gDrive.x()}}" ng-attr-cy="{{gDrive.y()}}" ng-attr-r="{{gDrive.radius()}}" />
+        <circle ng-attr-cx="{{drive.x}}" ng-attr-cy="{{drive.y}}" ng-attr-r="{{drive.radius}}" />
 
-        <circle ng-attr-cx="{{gDrive.x()}}"
-                ng-attr-cy="{{gDrive.y()}}"
-                ng-attr-r="{{gDrive.stopDisc.radius()}}"
+        <circle ng-attr-cx="{{drive.x}}"
+                ng-attr-cy="{{drive.y}}"
+                ng-attr-r="{{drive.stopDisc.radius}}"
                 mask="url(#stopDiscMask)"
                 fill="red" />
 
         <circle id="gDrive_pin"
-                ng-attr-cx="{{gDrive.x() + gDrive.pin.distance()}}"
-                ng-attr-cy="{{gDrive.y()}}"
-                ng-attr-r="{{gDrive.pin.radius()}}"
-                ng-attr-transform="rotate({{gDrive.pin.startPositionDegrees()}} {{gDrive.x()}} {{gDrive.y()}})"
+                ng-attr-cx="{{drive.x + drive.pin.distance}}"
+                ng-attr-cy="{{drive.y}}"
+                ng-attr-r="{{drive.pin.radius}}"
+                ng-attr-transform="rotate({{drive.pin.startPositionDegrees}} {{drive.x}} {{drive.y}})"
                 fill="red" />
     </g>
 
     <g id="gWheel"
-        ng-attr-transform="rotate({{gWheel.rotationDegrees()}} {{gWheel.x()}} {{gWheel.y()}})">
+        ng-attr-transform="rotate({{wheel.rotationDegrees()}} {{wheel.x}} {{wheel.y}})">
 
-        <circle ng-attr-cx="{{gWheel.x()}}"
-            ng-attr-cy="{{gWheel.y()}}"
-            ng-attr-r="{{gWheel.radius()}}"
+        <circle ng-attr-cx="{{wheel.x}}"
+            ng-attr-cy="{{wheel.y}}"
+            ng-attr-r="{{wheel.radius}}"
             mask="url(#gWheelMask)"
             fill="blue"/>
     </g>
 
 
     <circle id="gDrive_pin_positionRef"
-            ng-attr-cx="{{gDrive.pin.x()}}"
-            ng-attr-cy="{{gDrive.pin.y()}}"
-            ng-attr-r="{{gDrive.pin.radius() / 2}}"
-            fill="{{gDrive.pin.isWithinWheel() ? 'green' : 'yellow'}}" />
+            ng-attr-cx="{{drive.pin.x}}"
+            ng-attr-cy="{{drive.pin.y}}"
+            ng-attr-r="{{drive.pin.radius / 2}}"
+            fill="{{drive.pin.isWithinWheel() ? 'green' : 'yellow'}}" />
 
 </svg>
