@@ -34,7 +34,7 @@
             s.drive = {
                 x: (0 + params.c),
                 y: 0,
-                radius: params.a,
+                radius: (params.a + params.p),
                 stopDisc: {
                     radius: params.z,
                     clearanceRadius: params.v
