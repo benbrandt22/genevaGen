@@ -1,0 +1,19 @@
+﻿/* REF https://kuler.adobe.com/Neutral-Blue-color-theme-22361/ */
+
+svg#genevaDrive {
+    background-color: #fcfff5;
+}
+
+svg#genevaDrive #gWheel circle {
+    fill: #91aa9d;
+}
+
+
+svg#genevaDrive #gDrive #base {
+    fill: #193441;
+}
+
+svg#genevaDrive #gDrive #stopDisc,
+svg#genevaDrive #gDrive #pin {
+    fill: #3e606f;
+}

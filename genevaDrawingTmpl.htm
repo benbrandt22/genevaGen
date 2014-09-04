@@ -1,4 +1,4 @@
-﻿<svg width="500" height="350" svg-bind-viewbox="{{viewBox}}" style="border: 1px solid blue;">
+﻿<svg id="genevaDrive" width="500" height="350" svg-bind-viewbox="{{viewBox}}" style="border: 1px solid blue;">
 
 
     <defs>
@@ -42,15 +42,19 @@
     <g id="gDrive"
        ng-attr-transform="rotate({{drive.spinAngle}} {{drive.x}} {{drive.y}})">
 
-        <circle ng-attr-cx="{{drive.x}}" ng-attr-cy="{{drive.y}}" ng-attr-r="{{drive.radius}}" />
+        <circle id="base"
+                ng-attr-cx="{{drive.x}}"
+                ng-attr-cy="{{drive.y}}"
+                ng-attr-r="{{drive.radius}}"/>
 
-        <circle ng-attr-cx="{{drive.x}}"
+        <circle id="stopDisc"
+                ng-attr-cx="{{drive.x}}"
                 ng-attr-cy="{{drive.y}}"
                 ng-attr-r="{{drive.stopDisc.radius}}"
                 mask="url(#stopDiscMask)"
                 fill="red" />
 
-        <circle id="gDrive_pin"
+        <circle id="pin"
                 ng-attr-cx="{{drive.x + drive.pin.distance}}"
                 ng-attr-cy="{{drive.y}}"
                 ng-attr-r="{{drive.pin.radius}}"
