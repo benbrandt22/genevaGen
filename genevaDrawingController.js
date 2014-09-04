@@ -98,7 +98,7 @@
                 // min y = bottom of largest wheel radius, plus 10%
                 var miny = (s.wheel.y - (1.1 * Math.max(params.a, params.b)));
                 // width = distance between wheels, plus 110% of each radius
-                var width = params.c + (1.1 * params.a) + (1.1 * params.b);
+                var width = params.c + (1.1 * (params.a + params.p)) + (1.1 * params.b);
                 // height = max diameter plus 10%
                 var height = (Math.max(params.a, params.b) * 2) * 1.1;
 
