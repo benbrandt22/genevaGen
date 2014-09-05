@@ -72,4 +72,17 @@
             fill="blue"/>
     </g>
 
+    <g id="dimensions" ng-attr-display="{{dimensions.display ? '' : 'none'}}">
+        
+        <rect ng-attr-x="{{-100 * wheel.radius}}"
+            ng-attr-y="{{-100 * wheel.radius}}"
+            ng-attr-width="{{200 * wheel.radius}}"
+            ng-attr-height="{{200 * wheel.radius}}"
+            fill="white" fill-opacity="0.4" />
+
+        <path ng-attr-d="M {{wheel.x}} {{wheel.y}} L {{drive.x}} {{drive.y}} Z"
+            stroke="white" stroke-width="{{drive.pin.radius / 2}}" />
+
+    </g>
+
 </svg>

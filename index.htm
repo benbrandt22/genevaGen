@@ -90,7 +90,14 @@
             </label>
         </div>
 
-        <geneva-drawing params="drawingParams" animation="animation" />
+        <div>
+            <label>
+                <input type="checkbox" ng-model="dimensions.display" />
+                Show Dimensions
+            </label>
+        </div>
+
+        <geneva-drawing params="drawingParams" animation="animation" dimensions="dimensions" />
 
     </div>
 
