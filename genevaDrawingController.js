@@ -92,6 +92,22 @@
                 }
             };
 
+            s.dims = {
+                abcTriangle: {
+                    p1: { x: s.wheel.x, y: s.wheel.y },
+                    p2: { x: s.drive.x, y: s.drive.y },
+                    p3: {
+                        x: ( s.wheel.x + (s.wheel.radius * Math.cos((2 * Math.PI)/(2 * s.wheel.slotQty))) ),
+                        y: ( s.wheel.y - (s.wheel.radius * Math.sin((2 * Math.PI) / (2 * s.wheel.slotQty))) )
+                    }
+                },
+                vzTriangle: {
+                    p1: { x: s.drive.x, y: s.drive.y },
+                    p2: { x: (s.drive.x - s.drive.stopDisc.radius), y: s.drive.y },
+                    p3: { x: (s.drive.x - s.drive.stopDisc.radius), y: (s.drive.y - s.drive.stopDisc.clearanceRadius) },
+                }
+            };
+
             s.viewBox = (function () {
                 // min x = left side of the geneva wheel, plus 10%
                 var minx = (s.wheel.x - (1.1 * params.b));

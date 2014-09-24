@@ -80,8 +80,15 @@
             ng-attr-height="{{200 * wheel.radius}}"
             fill="white" fill-opacity="0.4" />
 
-        <path ng-attr-d="M {{wheel.x}} {{wheel.y}} L {{drive.x}} {{drive.y}} Z"
-            stroke="white" stroke-width="{{drive.pin.radius / 2}}" />
+        <path ng-attr-d="M {{dims.vzTriangle.p1.x}} {{dims.vzTriangle.p1.y}}
+            L {{dims.vzTriangle.p2.x}} {{dims.vzTriangle.p2.y}}
+            L {{dims.vzTriangle.p3.x}} {{dims.vzTriangle.p3.y}} Z"
+            fill="transparent" stroke="gray" stroke-width="{{drive.pin.radius / 2}}" />
+
+        <path ng-attr-d="M {{dims.abcTriangle.p1.x}} {{dims.abcTriangle.p1.y}}
+            L {{dims.abcTriangle.p2.x}} {{dims.abcTriangle.p2.y}}
+            L {{dims.abcTriangle.p3.x}} {{dims.abcTriangle.p3.y}} Z"
+            fill="transparent" stroke="white" stroke-width="{{drive.pin.radius / 2}}" />
 
     </g>
 
