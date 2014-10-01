@@ -1,0 +1,42 @@
+﻿<g ng-attr-transform="translate({{p1x}} {{p1y}}) rotate({{angle}} 0 0)">
+    <defs>
+        <mask id="textMask">
+            <circle ng-attr-cx="{{distanceBetween / 2}}"
+                ng-attr-cy="{{leader}}"
+                ng-attr-r="{{distanceBetween}}"
+                fill="white" />
+            <circle ng-attr-cx="{{distanceBetween / 2}}"
+                ng-attr-cy="{{leader}}"
+                ng-attr-r="{{fontSize * 0.75 * text.length}}"
+                fill="black" />
+        </mask>
+
+        <marker id="arrowLeft" orient="auto" markerUnits="strokeWidth"
+            markerWidth="4" markerHeight="4" refX="0" refY="2">
+            <path d="M0,2 L4,4 L4,0 Z" fill="black"/>
+        </marker>
+        <marker id="arrowRight" orient="auto" markerUnits="strokeWidth"
+            markerWidth="4" markerHeight="4" refX="4" refY="2">
+            <path d="M0,4 L4,2 L0,0 Z" fill="black"/>
+        </marker>
+    </defs>
+
+    <line x1="0" y1="0" x2="0" ng-attr-y2="{{leader * 1.02}}"
+        stroke="black" stroke-width="{{lineWidth}}" />
+    
+    <line ng-attr-x1="{{distanceBetween}}" y1="0" ng-attr-x2="{{distanceBetween}}" ng-attr-y2="{{leader * 1.02}}"
+        stroke="black" stroke-width="{{lineWidth}}" />
+
+    <line x1="0" ng-attr-y1="{{leader}}" ng-attr-x2="{{distanceBetween}}" ng-attr-y2="{{leader}}"
+        stroke="black" stroke-width="{{lineWidth}}"
+        mask="url(#textMask)"
+        marker-start="url(#arrowLeft)" marker-end="url(#arrowRight)" />
+
+    <text ng-attr-x="{{distanceBetween / 2}}" ng-attr-y="{{leader}}"
+        ng-attr-transform="rotate({{-1 * angle}} {{distanceBetween / 2}} {{leader}})"
+        font-family="Verdana" text-anchor="middle" dominant-baseline="middle"
+        font-size="{{fontSize}}">
+        {{text}}
+    </text>
+
+</g>

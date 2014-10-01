@@ -90,6 +90,24 @@
             L {{dims.abcTriangle.p3.x}} {{dims.abcTriangle.p3.y}} Z"
             fill="transparent" stroke="white" stroke-width="{{drive.pin.radius / 2}}" />
 
+        <drawing-dimension
+            p1x="dims.abcTriangle.p1.x" p1y="dims.abcTriangle.p1.y"
+            p2x="dims.abcTriangle.p2.x" p2y="dims.abcTriangle.p2.y"
+            text="'c'"
+            leader="wheel.radius" line-width="(drive.pin.radius / 4)" font-size="(drive.pin.radius * 1.5)" />
+
+        <drawing-dimension
+            p1x="dims.abcTriangle.p2.x" p1y="dims.abcTriangle.p2.y"
+            p2x="dims.abcTriangle.p3.x" p2y="dims.abcTriangle.p3.y"
+            text="'a'"
+            leader="drive.radius" line-width="(drive.pin.radius / 4)" font-size="(drive.pin.radius * 1.5)" />
+
+        <drawing-dimension
+            p1x="dims.abcTriangle.p3.x" p1y="dims.abcTriangle.p3.y"
+            p2x="dims.abcTriangle.p1.x" p2y="dims.abcTriangle.p1.y"
+            text="'b'"
+            leader="(wheel.radius / 2)" line-width="(drive.pin.radius / 4)" font-size="(drive.pin.radius * 1.5)" />
+
     </g>
 
 </svg>
