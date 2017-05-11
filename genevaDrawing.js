@@ -8,7 +8,8 @@
             restrict: 'E',
             scope: {
                 params: '=',
-                animation: '='
+                animation: '=',
+                dimensions: '='
             },
             controller: 'genevaDrawingController',
             link: function(scope, element, attrs) {

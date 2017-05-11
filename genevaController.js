@@ -13,6 +13,23 @@
         $scope.p = 0.25;
         $scope.t = 0.05;
 
+        $scope.$watchCollection('[a_input, b_input, primaryCalculationRadius, n, p, t]', function () {
+            // user changed a variable, update the drawing params
+            $scope.drawingParams = {
+                a: $scope.a(),
+                b: $scope.b(),
+                n: $scope.n,
+                p: $scope.p,
+                t: $scope.t,
+                c: $scope.c(),
+                s: $scope.s(),
+                w: $scope.w(),
+                y: $scope.y(),
+                z: $scope.z(),
+                v: $scope.v(),
+            };
+        });
+
         $scope.animation = {
             enabled: false
         };
@@ -75,22 +92,8 @@
             var v = ($scope.b() * $scope.z()) / $scope.a();
             return v;
         };
+        
 
-        $scope.drawingParams = function () {
-            return {
-                a: $scope.a(),
-                b: $scope.b(),
-                n: $scope.n,
-                p: $scope.p,
-                t: $scope.t,
-                c: $scope.c(),
-                s: $scope.s(),
-                w: $scope.w(),
-                y: $scope.y(),
-                z: $scope.z(),
-                v: $scope.v(),
-            };
-        };
 
     });
 

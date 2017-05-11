@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Geneva Drive Generator</title>
+    <link href="genevaDrawingStyles.css" rel="stylesheet" />
 </head>
 <body>
 
@@ -15,7 +16,7 @@
                 <span class="name">a</span>
                 <span class="desc">drive crank radius</span>
                 <input type="number" ng-model="a_input" ng-show="primaryCalculationRadius=='a'" />
-                <span ng-show="primaryCalculationRadius=='b'">{{a()}}</span>
+                <span ng-show="primaryCalculationRadius=='b'">{{drawingParams.a}}</span>
             </label>
         </div>
         <div class="variableDef">
@@ -24,7 +25,7 @@
                 <span class="name">b</span>
                 <span class="desc">Geneva wheel radius</span>
                 <input type="number" ng-model="b_input" ng-show="primaryCalculationRadius=='b'" />
-                <span ng-show="primaryCalculationRadius=='a'">{{b()}}</span>
+                <span ng-show="primaryCalculationRadius=='a'">{{drawingParams.b}}</span>
             </label>
         </div>
         <div class="variableDef">
@@ -54,32 +55,32 @@
         <div class="variableDef">
             <span class="name">c</span>
             <span class="desc">center distance</span>
-            <span class="value">{{c() | number:4}}</span>
+            <span class="value">{{drawingParams.c | number:4}}</span>
         </div>
         <div class="variableDef">
             <span class="name">s</span>
             <span class="desc">slot center length</span>
-            <span class="value">{{s() | number:4}}</span>
+            <span class="value">{{drawingParams.s | number:4}}</span>
         </div>
         <div class="variableDef">
             <span class="name">w</span>
             <span class="desc">slot width</span>
-            <span class="value">{{w() | number:4}}</span>
+            <span class="value">{{drawingParams.w | number:4}}</span>
         </div>
         <div class="variableDef">
             <span class="name">y</span>
             <span class="desc">stop arc radius</span>
-            <span class="value">{{y() | number:4}}</span>
+            <span class="value">{{drawingParams.y | number:4}}</span>
         </div>
         <div class="variableDef">
             <span class="name">z</span>
             <span class="desc">stop disc radius</span>
-            <span class="value">{{z() | number:4}}</span>
+            <span class="value">{{drawingParams.z | number:4}}</span>
         </div>
         <div class="variableDef">
             <span class="name">v</span>
             <span class="desc">clearance arc</span>
-            <span class="value">{{v() | number:4}}</span>
+            <span class="value">{{drawingParams.v | number:4}}</span>
         </div>
 
         <div>
@@ -89,7 +90,14 @@
             </label>
         </div>
 
-        <geneva-drawing params="drawingParams()" animation="animation" />
+        <div>
+            <label>
+                <input type="checkbox" ng-model="dimensions.display" />
+                Show Dimensions
+            </label>
+        </div>
+
+        <geneva-drawing params="drawingParams" animation="animation" dimensions="dimensions" />
 
     </div>
 
@@ -98,13 +106,14 @@
 
 
 
-
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+    
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-rc.3/angular.min.js"></script>
     <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="genevaController.js"></script>
     <script type="text/javascript" src="genevaDrawing.js"></script>
     <script type="text/javascript" src="genevaDrawingController.js"></script>
     <script type="text/javascript" src="svgBindViewbox.js"></script>
+    <script type="text/javascript" src="drawingDimension.js"></script>
 
 </body>
 </html>
